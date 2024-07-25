@@ -11966,8 +11966,24 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  margin-bottom: 250px;
+}
+
+footer {
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+}
+
 .hero-scene {
   position: relative;
+  margin-bottom: 15px;
 }
 .hero-scene::before {
   content: "";
@@ -11989,4 +12005,10 @@ textarea.form-control-lg {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (min-width: 960px) {
+  main {
+    margin-bottom: 200px;
+  }
 }/*# sourceMappingURL=main.css.map */

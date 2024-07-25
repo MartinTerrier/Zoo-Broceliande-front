@@ -6,18 +6,16 @@ const route404 = new Route("/404", "Page introuvable", "/pages/404.html");
 
 // Fonction pour récupérer la route correspondant à une URL donnée
 const getRouteByUrl = (url) => {
-    console.log(url);
     let currentRoute = null;
     // Parcours de toutes les routes pour trouver la correspondance
     allRoutes.forEach((element) => {
-        console.log(element);
         if (element.url === url) {
             currentRoute = element;
         }
     });
     // Si aucune correspondance n'est trouvée, on retourne la route 404
     // return currentRoute || route404;
-    if (currentRoute != null) {
+    if (currentRoute) {
         return currentRoute;
     } else {
         return route404;
@@ -27,17 +25,11 @@ const getRouteByUrl = (url) => {
 // Fonction pour charger le contenu de la page
 const LoadPageContent = async () => {
     const path = window.location.pathname;
-    console.log(path);
     // Récupération de l'URL actuelle
     const currentRoute = getRouteByUrl(path);
-    console.log(currentRoute);
     // Récupération du contenu HTML de la route
     const html = await fetch(currentRoute.pathHtml).then((data) => data.text());
     // Ajout du contenu HTML à l'élément avec l'ID "main-page"
-    // const mainPage = document.getElementById("main-page");
-    // if (mainPage) {
-    //     mainPage.innerHTML = html;
-    // }
     document.getElementById("main-page").innerHTML = html;
 
     // Ajout du contenu JavaScript
@@ -48,10 +40,7 @@ const LoadPageContent = async () => {
         scriptTag.setAttribute("src", currentRoute.pathJS);
 
         // Ajout de la balise script au corps du document
-        const body = document.querySelector("body");
-        if (body) {
-            body.appendChild(scriptTag);
-        }
+        document.querySelector("body").appendChild(scriptTag);
     }
 
     // Changement du titre de la page
@@ -60,6 +49,7 @@ const LoadPageContent = async () => {
 
 // Fonction pour gérer les événements de routage (clic sur les liens)
 const routeEvent = (event) => {
+    event = event || window.event;
     event.preventDefault();
     // Mise à jour de l'URL dans l'historique du navigateur
     window.history.pushState({}, "", event.target.href);
