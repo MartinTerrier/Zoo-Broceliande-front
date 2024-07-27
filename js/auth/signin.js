@@ -1,9 +1,11 @@
+import { setConnexionToken, apiBaseUrl, getConnexionToken } from "../script.js";
+
 const emailInput = document.getElementById('email-input');
 const passwordInput = document.getElementById('password-input');
 const btnSignIn = document.getElementById('btn-signin');
 const signinForm = document.getElementById('signin-form');
 
-const checkCredentials = () => {
+const checkCredentials = async () => {
     let dataForm = new FormData(signinForm);
 
     let myHeaders = new Headers();
@@ -22,9 +24,11 @@ const checkCredentials = () => {
     };
 
     fetch(`${apiBaseUrl}/auth/login`, requestOptions)
-    .then((response) => {
+    .then(async (response) => {
         if (response.ok) {
-            return response.json();
+            const json = await response.json();
+            console.log(json);
+            return json;
         } else {
             emailInput.classList.add('is-invalid');
             passwordInput.classList.add('is-invalid');
@@ -32,7 +36,7 @@ const checkCredentials = () => {
     })
     .then((result) => {
         setConnexionToken(result);
-        setCookie(roleCookieName, 'admin', 7);
+
         window.location.replace('/');
     })
     .catch((error) => console.error(error));

@@ -1,3 +1,5 @@
+import { apiBaseUrl } from "./script.js";
+
 const commentList = document.getElementById('comment-list');
 let commentHtml = '';
 

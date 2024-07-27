@@ -1,5 +1,6 @@
 import Route from './route.js';
 import { allRoutes, websiteName } from './allRoutes.js';
+import { manageRoleElements, isConnected, getRole } from '../js/script.js';
 
 // Création d'une route pour la page 404 (page introuvable)
 const route404 = new Route("/404", "Page introuvable", [], "/pages/404.html");
@@ -53,7 +54,7 @@ const LoadPageContent = async () => {
     if (currentRoute.pathJS) {
         // Création d'une balise script
         const scriptTag = document.createElement("script");
-        scriptTag.setAttribute("type", "text/javascript");
+        scriptTag.setAttribute("type", "module");
         scriptTag.setAttribute("src", currentRoute.pathJS);
 
         // Ajout de la balise script au corps du document
