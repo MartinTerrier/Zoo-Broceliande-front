@@ -1,5 +1,6 @@
 const inputEmail = document.getElementById('email-input');
 const inputMessage = document.getElementById('message-input');
+const inputTitle = document.getElementById('title-input');
 const btnSubmit = document.getElementById('btn-submit');
 
 const validateEmail = (input) => {
@@ -40,4 +41,5 @@ const validateForm = () => {
 }
 
 inputEmail.addEventListener('keyup', validateForm);
+inputTitle.addEventListener('keyup', validateForm);
 inputMessage.addEventListener('keyup', validateForm);

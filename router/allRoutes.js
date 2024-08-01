@@ -7,6 +7,9 @@ export const allRoutes = [
     new Route('/habitats', 'Habitats et animaux', [], '/pages/habitats.html'),
     new Route('/comments', 'Vos commentaires', [], '/pages/comments.html', '/js/comments.js'),
     new Route('/contact', 'Contactez-nous', [], '/pages/contact.html', '/js/contact.js'),
+    new Route('/admin', 'Mon compte', [ 'admin' ], '/pages/admin.html'),
+    new Route('/employee', 'Mon compte', [ 'employee' ], '/pages/employee.html'),
+    new Route('/vet', 'Mon compte', [ 'vet' ], '/pages/vet.html'),
 ];
 
 export const websiteName = 'Zoo Arcadia';

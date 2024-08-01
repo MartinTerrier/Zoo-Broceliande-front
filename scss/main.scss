@@ -1,22 +1,44 @@
 @import "/node_modules/bootstrap-icons/font/bootstrap-icons.css";
 @import 'custom';
 
-html{
+html {
     position: relative;
     min-height: 100%;
 }
 
-main{
+main {
     margin-bottom: 250px;
 }
 
-footer{
+footer {
     padding: 15px;
     position: absolute;
     bottom: 0;
 }
 
-.hero-scene{
+article {
+    position: relative;
+
+    .action-image-buttons{
+        position : absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        justify-content: flex-end;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:hover {
+        .action-image-buttons{
+        opacity: 1;
+        }
+    }
+}
+
+.hero-scene {
     position: relative;
     margin-bottom: 15px;
 
@@ -32,11 +54,11 @@ footer{
         filter: brightness(0.3);
     }
 
-    *{
+    * {
         position: relative;
     }
 
-    .hero-scene-content{
+    .hero-scene-content {
         height: 300px;
         display: flex;
         flex-direction: column;

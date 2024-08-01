@@ -1,46 +1,21 @@
 import { jwtDecode } from "../node_modules/jwt-decode/build/esm/index.js";
 
 const signoutBtn = document.getElementById('signout-btn');
+const accountPageLink = document.getElementById('account-page');
 const apiBaseUrl = 'http://localhost:3000';
 
 
 signoutBtn.addEventListener('click', signout);
 
-// function setCookie(name,value,days) {
-//     var expires = "";
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days*24*60*60*1000));
-//         expires = `; expires=${date.toUTCString()}`;
-//     }
-//     document.cookie = `${name}=${(value || "")}${expires}; path=/`;
-// }
-// function getCookie(name) {
-//     var nameEQ = name + "=";
-//     var ca = document.cookie.split(';');
-//     for(var i=0;i < ca.length;i++) {
-//         var c = ca[i];
-//         while (c.charAt(0)==' ') c = c.substring(1,c.length);
-//         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-//     }
-//     return null;
-// }
-// function eraseCookie(name) {   
-// document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-// }
-
 function setConnexionToken(token){
-    // setCookie(tokenCookieName, token, 7);
-    localStorage.setItem('accessToken', token.accessToken)
+    localStorage.setItem('accessToken', token.accessToken);
 }
 function getConnexionToken(){
-    // return getCookie(tokenCookieName);
-    return localStorage.getItem('accessToken')
+    const token = localStorage.getItem('accessToken');
+    return token;
 }
 
-// const roleCookieName = 'role';
 function getRole(){
-    // return getCookie(roleCookieName);
     const accessToken = getConnexionToken();
     if (accessToken) {
         const decodedToken = jwtDecode(accessToken);
@@ -58,7 +33,7 @@ function signout(){
 }
 
 
-export function manageRoleElements () {
+function manageRoleElements () {
     const userConnected = isConnected();
     const role = getRole();
 
@@ -87,12 +62,15 @@ export function manageRoleElements () {
                 }
                 break;
             case 'employee':
-                if (!userConnected || role != 'employee') {
+                if (!userConnected || (role != 'employee' && role != 'admin')) {
                     element.classList.add('d-none');
                 }
                 break;
         }
+        if (role) {
+            accountPageLink.innerHTML=`<a class="nav-link" href="/${role}">Mon compte</a>`
+        };
     })
 }
 
-export { apiBaseUrl, setConnexionToken, getRole, isConnected, getConnexionToken };
+export { apiBaseUrl, setConnexionToken, getRole, isConnected, getConnexionToken, manageRoleElements };
