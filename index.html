@@ -23,19 +23,25 @@
                 <a class="nav-link active" aria-current="page" href="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Environnements</a>
+                <a class="nav-link" href="/habitats">Habitats</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
+                <a class="nav-link" href="/services">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Commentaires</a>
+                <a class="nav-link" href="/comments">Avis</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="/contact">Contact</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Connexion</a>
+              <li class="nav-item" data-show="disconnected">
+                <a class="nav-link" href="/signin">Connexion</a>
+              </li>
+              <li class="nav-item" id="account-page">
+                
+              </li>
+              <li class="nav-item" data-show="connected">
+                <button class="nav-link" id="signout-btn">Déconnexion</a>
               </li>
             </ul>
           </div>
@@ -43,9 +49,11 @@
       </nav>
 </header>
 
-<main id="main-page"></main>
+<main id="main-page">
+  <!-- Le contenu de la page est injecté ici -->
+</main>
 
-<footer class="bg-primary text-white text-center footer">
+<footer class="bg-primary text-white text-center container-fluid">
   <div class="row d-flex align-items-center">
     <div class="col-12 col-lg-4">
       <h3>Zooparc d'Arcadia</h3>
@@ -60,12 +68,13 @@
       9h - 18h
     </div>
     <div class="col-6 col-lg-4">
-      <a href="#" class="text-light">Formulaire de contact</a>
+      <a href="/contact" class="text-light">Formulaire de contact</a>
     </div>
   </div>
 </footer>
 
-<script type="module" src="router/router.js"></script>
+<script type="module" src="/js/script.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="/router/router.js"></script>
 </body>
 </html>
