@@ -3,8 +3,8 @@
         <h1>Nos services</h1>
     </div>
 </div>
-<div class="container text-center">
-  <button type="button" id='create-service-button' class="btn btn-primary text-white" data-show="admin" data-bs-toggle="modal" data-bs-target="#create-service-modal">Créer un service.</button>
+<div class="container text-center mb-3">
+  <button type="button" class="btn btn-primary text-white" data-show="admin" data-bs-toggle="modal" data-bs-target="#create-service-modal">Créer un service.</button>
 </div>
 <section id="service-list">
 
@@ -27,6 +27,10 @@
                     <div class="mb-3">
                       <label for="service-update-content-input" class="form-label">Description</label>
                       <textarea class="form-control" id="service-update-content-input"  name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="service-update-image-input" class="form-label">Image associée</label>
+                      <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="service-update-image-input" name="imageFile">
                     </div>
                     <div class="text-center">
                         <button type="button" id='service-update-button' class="btn btn-primary text-white">Enregistrer</button>
@@ -68,6 +72,10 @@
                     <div class="mb-3">
                       <label for="service-create-content-input" class="form-label">Description</label>
                       <textarea class="form-control" id="service-create-content-input"  name="description"></textarea>
+                    </div>
+                    <div class="mb-3"></div>
+                      <label for="service-create-image-input" class="form-label">Image associée</label>
+                      <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="service-create-image-input" name="imageFile">
                     </div>
                     <div class="text-center">
                         <button type="button" id='service-create-button' class="btn btn-primary text-white">Enregistrer</button>
