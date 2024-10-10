@@ -10,10 +10,14 @@ const serviceCreateModal = new bootstrap.Modal(serviceCreateModalEl);
 const serviceUpdateForm = document.getElementById('service-update-form');
 const serviceUpdateNameInput = document.getElementById('service-update-name-input');
 const serviceUpdateContentInput = document.getElementById('service-update-content-input');
+const serviceUpdateImageInput = document.getElementById('service-update-image-input');
 const serviceUpdateButton = document.getElementById('service-update-button');
 const serviceDeleteWarning = document.getElementById('delete-service-modal-warning');
 const serviceDeleteButton = document.getElementById('delete-service-button');
 const serviceCreateForm = document.getElementById('service-create-form');
+const serviceCreateNameInput = document.getElementById('service-create-name-input');
+const serviceCreateContentInput = document.getElementById('service-create-content-input');
+const serviceCreateImageInput = document.getElementById('service-create-image-input');
 const serviceCreateButton = document.getElementById('service-create-button');
 let serviceToUpdate;
 let serviceToDelete;
@@ -38,10 +42,10 @@ async function displayAllServices () {
             <h2 id = 'service-name-${service.id}' class="text-center text-primary">${service.name}</h2>
             <div class="row row-cols-2 align-items-center">
                 <div class="col">
-                    ${even ? `<p id='service-description-${service.id}'>${service.description}</p>` : `<img id="service-image-${service.id}" src="${apiBaseUrl}/services/image/${service.id}" alt="une image trop cool" class="w-100 rounded"></img>`}
+                    ${even ? `<p id='service-description-${service.id}'>${service.description}</p>` : `<img id="service-image-${service.id}" src="${apiBaseUrl}/services/image/${service.imageId}" alt="${service.name}" class="w-100 rounded"></img>`}
                 </div>
                 <div class="col">
-                    ${!even ? `<p id='service-description-${service.id}'>${service.description}</p>` : `<img id="service-image-${service.id}" src="${apiBaseUrl}/services/image/${service.id}" alt="une image trop cool" class="w-100 rounded"></img>`}
+                    ${!even ? `<p id='service-description-${service.id}'>${service.description}</p>` : `<img id="service-image-${service.id}" src="${apiBaseUrl}/services/image/${service.imageId}" alt="${service.name}" class="w-100 rounded"></img>`}
                 </div>
             </div>
         </div>
@@ -59,7 +63,8 @@ serviceUpdateModalEl.addEventListener('show.bs.modal', (event) => {
   const serviceId = button.getAttribute('data-bs-service-id');
   serviceToUpdate = servicesArray.find((service) => (service.id === +serviceId));
   serviceUpdateNameInput.value = serviceToUpdate.name;
-  serviceUpdateContentInput.innerHTML = serviceToUpdate.description;
+  serviceUpdateContentInput.value = serviceToUpdate.description;
+  serviceUpdateImageInput.value = null;
   serviceUpdateButton.addEventListener('click', updateService);
 });
 
@@ -83,7 +88,6 @@ const updateService = async () => {
         const updatedService = await response.json();
         const updatedServiceIndex = servicesArray.findIndex((service) => service.id === updatedService.id);
         servicesArray[updatedServiceIndex] = updatedService;
-        console.log(servicesArray[updatedServiceIndex]);
         
         displayAllServices();
         serviceUpdateModal.hide();
@@ -131,6 +135,13 @@ const deleteService = async () => {
   .catch((error) => console.error(error));
 }
 
+serviceCreateModalEl.addEventListener('show.bs.modal', () => {
+  serviceCreateNameInput.value = null;
+  serviceCreateContentInput.value = null;
+  serviceCreateImageInput.value = null;
+  serviceCreateButton.addEventListener('click', createService);
+});
+
 const createService = async () => {
   const formData = new FormData(serviceCreateForm);
   const token = getConnexionToken();
@@ -159,5 +170,3 @@ const createService = async () => {
     })
     .catch((error) => console.error(error));
 }
-
-serviceCreateButton.addEventListener("click", createService);
