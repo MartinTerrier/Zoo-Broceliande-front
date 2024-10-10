@@ -3,3 +3,34 @@
         <h1>Mon compte</h1>
     </div>
 </div>
+
+<div>
+    <h2>Édition des habitats</h2>
+</div>
+<div class="container">
+    <form id="habitat-update-form">
+        <div class="mb-3">
+            <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
+            <select class="form-select" id="habitat-update-select">
+                <option value="1">Savane</option>
+                <option value="2">Jungle</option>
+                <option value="3">Marais</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="habitat-update-name-input" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="habitat-update-name-input" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="habitat-update-content-input" class="form-label">Description</label>
+            <textarea class="form-control" id="habitat-update-content-input" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="habitat-update-image-input" class="form-label">Image associée</label>
+            <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="habitat-update-image-input" name="imageFile">
+        </div>
+        <div class="text-center">
+            <button type="button" id='habitat-update-button' class="btn btn-primary text-white">Enregistrer</button>
+        </div>
+    </form>
+</div>
