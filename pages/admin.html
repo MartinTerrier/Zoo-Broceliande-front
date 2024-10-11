@@ -4,34 +4,48 @@
     </div>
 </div>
 
-<div>
-    <h2>Édition des habitats</h2>
-</div>
-<div class="container">
-    <form id="habitat-update-form">
-        <div class="mb-3">
-            <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
-            <select class="form-select" id="habitat-update-select">
-                <option value="1">Savane</option>
-                <option value="2">Jungle</option>
-                <option value="3">Marais</option>
-            </select>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="habitat-update-tab" data-bs-toggle="tab" data-bs-target="#habitat-update" type="button" role="tab" aria-selected="true">Édition des habitats</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="animal-management-tab" data-bs-toggle="tab" data-bs-target="#animal-management" type="button" role="tab" aria-selected="false">Gestion des animaux</button>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="habitat-update" role="tab-panel" aria-labelledby="habitat-update-tab">
+        <form id="habitat-update-form">
+            <div class="mb-3">
+                <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
+                <select class="form-select" id="habitat-update-select">
+                    <option value="1">Savane</option>
+                    <option value="2">Jungle</option>
+                    <option value="3">Marais</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-name-input" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="habitat-update-name-input" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-content-input" class="form-label">Description</label>
+                <textarea class="form-control" id="habitat-update-content-input" name="description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-image-input" class="form-label">Image associée</label>
+                <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="habitat-update-image-input" name="imageFile">
+            </div>
+            <div class="text-center">
+                <button type="button" id='habitat-update-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="habitat-update-confirmation"></div>
+    </div>
+
+    <div class="tab-pane" id="animal-management" role="tab-panel" aria-labelledby="animal-management-tab">
+        <div class="text-center my-3">
+            <button type="button" class="btn btn-primary text-white">Créer un animal</button>
         </div>
-        <div class="mb-3">
-            <label for="habitat-update-name-input" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="habitat-update-name-input" name="name">
-        </div>
-        <div class="mb-3">
-            <label for="habitat-update-content-input" class="form-label">Description</label>
-            <textarea class="form-control" id="habitat-update-content-input" name="description"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="habitat-update-image-input" class="form-label">Image associée</label>
-            <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="habitat-update-image-input" name="imageFile">
-        </div>
-        <div class="text-center">
-            <button type="button" id='habitat-update-button' class="btn btn-primary text-white">Enregistrer</button>
-        </div>
-    </form>
-    <div id="habitat-update-confirmation"></div>
+    </div>
 </div>
