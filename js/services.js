@@ -76,7 +76,7 @@ const updateService = async () => {
     myHeaders.append('Authorization', `Bearer ${token}`);
 
     const requestOptions = {
-      method: 'POST',
+      method: 'PATCH',
       headers: myHeaders,
       body: formData,
       redirect: 'follow'
