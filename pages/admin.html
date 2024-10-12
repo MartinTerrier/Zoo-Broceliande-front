@@ -14,7 +14,8 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="habitat-update" role="tab-panel" aria-labelledby="habitat-update-tab">
+
+    <div class="tab-pane active container my-3" id="habitat-update" role="tab-panel" aria-labelledby="habitat-update-tab">
         <form id="habitat-update-form">
             <div class="mb-3">
                 <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
@@ -44,8 +45,48 @@
     </div>
 
     <div class="tab-pane" id="animal-management" role="tab-panel" aria-labelledby="animal-management-tab">
+
         <div class="text-center my-3">
-            <button type="button" class="btn btn-primary text-white">Créer un animal</button>
+            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#create-animal-modal">Créer un animal</button>
         </div>
+
+        <div class="modal fade" id="create-animal-modal" tabindex="-1" aria-labelledby="create-animal-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title fs-5" id="create-animal-modal-label">Création d'un animal</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id='animal-create-form'>
+                        <div class="mb-3">
+                          <label for="animal-create-name-input" class="form-label">Nom</label>
+                          <input type="text" class="form-control" id="animal-create-name-input" value="" name="name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="animal-create-species-input" class="form-label">Espèce</label>
+                          <select class="form-select" id="animal-create-species-input" name="speciesId"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="animal-create-habitat-input" class="form-label">Habitat</label>
+                            <select class="form-select" id="animal-create-habitat-input" name="habitatId">
+                                <option value="1">Savane</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Marais</option>
+                            </select>
+                        </div>
+                        <div class="mb-3"></div>
+                          <label for="animal-create-image-input" class="form-label">Image associée</label>
+                          <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="animal-create-image-input" name="imageFile">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="button" id='animal-create-button' class="btn btn-primary text-white">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+
     </div>
+
 </div>
