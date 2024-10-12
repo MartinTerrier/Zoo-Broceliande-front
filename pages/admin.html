@@ -87,6 +87,49 @@
               </div>
             </div>
 
+            <div class="container">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="animal-update-cards">
+                    
+                </div>
+            </div>
+
+            <div class="modal fade" id="update-animal-modal" tabindex="-1" aria-labelledby="update-animal-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title fs-5" id="update-animal-modal-label">Édition d'un animal</h2>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='animal-update-form'>
+                            <div class="mb-3">
+                              <label for="animal-update-name-input" class="form-label">Nom</label>
+                              <input type="text" class="form-control" id="animal-update-name-input" value="" name="name">
+                            </div>
+                            <div class="mb-3">
+                              <label for="animal-update-species-input" class="form-label">Espèce</label>
+                              <select class="form-select" id="animal-update-species-input" name="speciesId"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="animal-update-habitat-input" class="form-label">Habitat</label>
+                                <select class="form-select" id="animal-update-habitat-input" name="habitatId">
+                                    <option value="1">Savane</option>
+                                    <option value="2">Jungle</option>
+                                    <option value="3">Marais</option>
+                                </select>
+                            </div>
+                            <div class="mb-3"></div>
+                              <label for="animal-update-image-input" class="form-label">Image associée</label>
+                              <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="animal-update-image-input" name="imageFile">
+                            </div>
+                            <div class="mb-3 text-center">
+                                <button type="button" id='animal-update-button' class="btn btn-primary text-white">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+
     </div>
 
 </div>

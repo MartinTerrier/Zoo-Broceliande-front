@@ -18,6 +18,18 @@ const animalCreateHabitatInput = document.getElementById('animal-create-habitat-
 const animalCreateImageInput = document.getElementById('animal-create-image-input');
 const animalCreateButton = document.getElementById('animal-create-button');
 
+const animalUpdateCards = document.getElementById('animal-update-cards');
+
+const animalUpdateModalEl = document.getElementById('update-animal-modal');
+const animalUpdateModal = new bootstrap.Modal(animalUpdateModalEl);
+const animalUpdateForm = document.getElementById('animal-update-form');
+const animalUpdateNameInput = document.getElementById('animal-update-name-input');
+const animalUpdateSpeciesInput = document.getElementById('animal-update-species-input');
+const animalUpdateHabitatInput = document.getElementById('animal-update-habitat-input');
+const animalUpdateImageInput = document.getElementById('animal-update-image-input');
+const animalUpdateButton = document.getElementById('animal-update-button');
+let animalToUpdate;
+
 const preloadSelectedHabitat = async (habitatId) => {
     habitatUpdateConfirmation.innerHTML = '';
     const token = getConnexionToken();
@@ -40,11 +52,11 @@ const preloadSelectedHabitat = async (habitatId) => {
     .catch((error) => console.error(error));
 }
 
-preloadSelectedHabitat(1);
+await preloadSelectedHabitat(1);
 
 habitatUpdateSelect.addEventListener('change', async (event) => {
     const habitatId = event.target.value;
-    preloadSelectedHabitat(habitatId);
+    await preloadSelectedHabitat(habitatId);
 })
 
 const updateHabitat = async () => {
@@ -81,7 +93,7 @@ habitatUpdateButton.addEventListener('click', updateHabitat);
 
 const getSpeciesSelectHtml = async () => {
   const speciesArray = await fetch(`${apiBaseUrl}/animals/species`, { method: "GET", redirect: "follow"})
-  .then((response) => (response.json()))
+  .then((response) => response.json())
   .catch((error) => console.error(error));
   
   let speciesSelectHtml = '';
@@ -119,12 +131,83 @@ animalCreateModalEl.addEventListener('show.bs.modal', async () => {
       .then(async (response) => {
         if (response.ok) {
           const newAnimal = await response.json();
-          console.log(newAnimal);
   
           animalCreateModal.hide();
         } else {
-          alert("Le nouveau service n'a pas pu être créé.");
+          alert("Le nouvel animal n'a pas pu être créé.");
         }
       })
       .catch((error) => console.error(error));
   }
+
+const generateAnimalUpdateCards = async () => {
+  const animalsArray = await fetch(`${apiBaseUrl}/animals`, { method: "GET", redirect: "follow" })
+  .then((response) => response.json())
+  .catch((error) => console.error(error));
+
+  let animalCardsHtml = "";
+  animalsArray.forEach((animal) => {
+    animalCardsHtml += `<div class="col">
+      <div class="card shadow-sm">
+        <img src="${apiBaseUrl}/animals/image/${animal.imageId}" alt="${animal.species.label}" class="card-image-top"></img>
+        <div class="card-body">
+          <p class="card-text">${animal.name}</p>
+          <p class="card-text">${animal.habitat.name}</p>
+          <p class="card-text">${animal.species.label}</p>
+          <div class="action-image-buttons">
+            <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#update-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#delete-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  })
+
+  animalUpdateCards.innerHTML = animalCardsHtml;
+}
+
+await generateAnimalUpdateCards();
+
+animalUpdateModalEl.addEventListener('show.bs.modal', async (event) => {
+  const button = event.relatedTarget;
+  const animalId = button.getAttribute('data-bs-animal-id');
+  animalToUpdate = await fetch(`${apiBaseUrl}/animals/${animalId}`, { method: "GET", redirect: "follow"})
+  .then((response) => (response.json()))
+  .catch((error) => console.error(error));
+  animalUpdateNameInput.value = animalToUpdate.name;
+  animalUpdateSpeciesInput.innerHTML = await getSpeciesSelectHtml();
+  animalUpdateSpeciesInput.value = animalToUpdate.species.id;
+  animalUpdateHabitatInput.value = animalToUpdate.habitat.id;
+  animalUpdateImageInput.value = null;
+  animalUpdateButton.addEventListener('click', updateAnimal);
+});
+
+const updateAnimal = async () => {
+  const formData = new FormData(animalUpdateForm);
+  formData.speciesId = +formData.habitatId;
+  formData.habitatId = +formData.habitatId;
+  
+  const token = getConnexionToken();
+
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization', `Bearer ${token}`);
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: myHeaders,
+    body: formData,
+    redirect: 'follow'
+  };
+
+    await fetch(`${apiBaseUrl}/animals/${animalToUpdate.id}`, requestOptions)
+    .then(async (response) => {
+      if (response.ok) {
+        const updatedAnimal = await response.json();
+
+        animalUpdateModal.hide();
+      } else {
+        alert("Vos modifications n'ont pas pu être sauvegardées.");
+      }
+    })
+    .catch((error) => console.error(error));
+}
