@@ -8,7 +8,7 @@ export const allRoutes = [
     new Route('/comments', 'Vos commentaires', [], '/pages/comments.html', '/js/comments.js'),
     new Route('/contact', 'Contactez-nous', [], '/pages/contact.html', '/js/contact.js'),
     new Route('/admin', 'Mon compte', [ 'admin' ], '/pages/admin.html', '/js/admin.js'),
-    new Route('/employee', 'Mon compte', [ 'employee' ], '/pages/employee.html'),
+    new Route('/employee', 'Mon compte', [ 'employee' ], '/pages/employee.html', '/js/employee.js'),
     new Route('/vet', 'Mon compte', [ 'vet' ], '/pages/vet.html'),
 ];
 
