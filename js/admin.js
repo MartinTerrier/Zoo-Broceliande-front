@@ -39,7 +39,7 @@ const userCreateForm = document.getElementById('user-create-form');
 const userCreateEmailInput = document.getElementById('user-create-email-input');
 const userCreateNameInput = document.getElementById('user-create-name-input');
 const userCreateFirstNameInput = document.getElementById('user-create-first-name-input');
-const userCreateRoleSelect = document.getElementById('user-create-role-select');
+const userCreatePasswordInput = document.getElementById('user-create-password-input');
 const userCreateButton = document.getElementById('user-create-button');
 const userCreateConfirmation = document.getElementById('user-create-confirmation');
 
@@ -266,6 +266,7 @@ const createUser = async () => {
 
   let raw = JSON.stringify({
     'userName': formData.get('userName'),
+    'password': formData.get('password'),
     'name': formData.get('name'),
     'firstName': formData.get('firstName'),
     'role': formData.get('role'),
@@ -281,13 +282,14 @@ const createUser = async () => {
   await fetch(`${apiBaseUrl}/auth/create`, requestOptions)
   .then(async (response) => {
       if (response.ok) {
-          const [createdUser, password] = await response.json();
+          const [createdUser, clearPassword] = await response.json();
           
           userCreateEmailInput.value = null;
+          userCreatePasswordInput.value = null;
           userCreateNameInput.value = null;
           userCreateFirstNameInput.value = null;
           userCreateConfirmation.innerHTML = `<div><i class="bi bi-check-square-fill text-primary"></i> Un nouvel utilisateur associé à l'adresse ${createdUser.userName} a bien été créé.
-          Son mot de passe est <strong>${password}</strong>. Attention : ce mot de passe n'est pas stocké en clair dans la base de données, copiez-le donc soigneusement pour le transmettre au nouveau collaborateur !</div>`
+          Son mot de passe est <strong>${clearPassword}</strong>. Attention : ce mot de passe n'est pas stocké en clair dans la base de données, copiez-le donc soigneusement pour le transmettre au nouveau collaborateur !</div>`
       } else {
           alert("Le nouvel utilisateur n'a pas pu être créé.");
       }})
