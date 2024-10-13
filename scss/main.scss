@@ -38,6 +38,14 @@ article {
     }
 }
 
+.card {
+    img{
+        height: 115px;
+        width: auto;
+        object-fit: cover;
+    }
+}
+
 .hero-scene {
     position: relative;
     margin-bottom: 15px;

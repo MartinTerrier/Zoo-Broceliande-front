@@ -4,34 +4,184 @@
     </div>
 </div>
 
-<div>
-    <h2>Édition des habitats</h2>
-</div>
-<div class="container">
-    <form id="habitat-update-form">
-        <div class="mb-3">
-            <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
-            <select class="form-select" id="habitat-update-select">
-                <option value="1">Savane</option>
-                <option value="2">Jungle</option>
-                <option value="3">Marais</option>
-            </select>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="habitat-update-tab" data-bs-toggle="tab" data-bs-target="#habitat-update" type="button" role="tab" aria-selected="true">Édition des habitats</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="animal-management-tab" data-bs-toggle="tab" data-bs-target="#animal-management" type="button" role="tab" aria-selected="false">Gestion des animaux</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="user-create-tab" data-bs-toggle="tab" data-bs-target="#user-create" type="button" role="tab" aria-selected="true">Création des utilisateurs</button>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active container my-3" id="habitat-update" role="tab-panel" aria-labelledby="habitat-update-tab">
+        <form id="habitat-update-form">
+            <div class="mb-3">
+                <label for="habitat-update-select" class="form-label">Habitat à modifier</label>
+                <select class="form-select" id="habitat-update-select">
+                    <option value="1">Savane</option>
+                    <option value="2">Jungle</option>
+                    <option value="3">Marais</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-name-input" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="habitat-update-name-input" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-content-input" class="form-label">Description</label>
+                <textarea class="form-control" id="habitat-update-content-input" name="description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="habitat-update-image-input" class="form-label">Image associée</label>
+                <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="habitat-update-image-input" name="imageFile">
+            </div>
+            <div class="text-center">
+                <button type="button" id='habitat-update-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="habitat-update-confirmation"></div>
+    </div>
+
+    <div class="tab-pane" id="animal-management" role="tab-panel" aria-labelledby="animal-management-tab">
+
+        <div class="text-center my-3">
+            <button type="button" class="btn btn-dark text-white" data-bs-toggle="modal" data-bs-target="#create-animal-modal">Créer un animal</button>
         </div>
-        <div class="mb-3">
-            <label for="habitat-update-name-input" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="habitat-update-name-input" name="name">
-        </div>
-        <div class="mb-3">
-            <label for="habitat-update-content-input" class="form-label">Description</label>
-            <textarea class="form-control" id="habitat-update-content-input" name="description"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="habitat-update-image-input" class="form-label">Image associée</label>
-            <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="habitat-update-image-input" name="imageFile">
-        </div>
-        <div class="text-center">
-            <button type="button" id='habitat-update-button' class="btn btn-primary text-white">Enregistrer</button>
-        </div>
-    </form>
-    <div id="habitat-update-confirmation"></div>
+
+        <div class="modal fade" id="create-animal-modal" tabindex="-1" aria-labelledby="create-animal-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title fs-5" id="create-animal-modal-label">Création d'un animal</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id='animal-create-form'>
+                        <div class="mb-3">
+                          <label for="animal-create-name-input" class="form-label">Nom</label>
+                          <input type="text" class="form-control" id="animal-create-name-input" value="" name="name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="animal-create-species-input" class="form-label">Espèce</label>
+                          <select class="form-select" id="animal-create-species-input" name="speciesId"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="animal-create-habitat-input" class="form-label">Habitat</label>
+                            <select class="form-select" id="animal-create-habitat-input" name="habitatId">
+                                <option value="1">Savane</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Marais</option>
+                            </select>
+                        </div>
+                        <div class="mb-3"></div>
+                          <label for="animal-create-image-input" class="form-label">Image associée</label>
+                          <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="animal-create-image-input" name="imageFile">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="button" id='animal-create-button' class="btn btn-dark text-white">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-3" id="animal-update-cards">
+                    
+                </div>
+            </div>
+
+            <div class="modal fade" id="update-animal-modal" tabindex="-1" aria-labelledby="update-animal-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title fs-5" id="update-animal-modal-label">Édition d'un animal</h2>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='animal-update-form'>
+                            <div class="mb-3">
+                              <label for="animal-update-name-input" class="form-label">Nom</label>
+                              <input type="text" class="form-control" id="animal-update-name-input" value="" name="name">
+                            </div>
+                            <div class="mb-3">
+                              <label for="animal-update-species-input" class="form-label">Espèce</label>
+                              <select class="form-select" id="animal-update-species-input" name="speciesId"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="animal-update-habitat-input" class="form-label">Habitat</label>
+                                <select class="form-select" id="animal-update-habitat-input" name="habitatId">
+                                    <option value="1">Savane</option>
+                                    <option value="2">Jungle</option>
+                                    <option value="3">Marais</option>
+                                </select>
+                            </div>
+                            <div class="mb-3"></div>
+                              <label for="animal-update-image-input" class="form-label">Image associée</label>
+                              <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="animal-update-image-input" name="imageFile">
+                            </div>
+                            <div class="mb-3 text-center">
+                                <button type="button" id='animal-update-button' class="btn btn-primary text-white">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+
+            <div class="modal fade" id="delete-animal-modal" tabindex="-1" aria-labelledby="delete-animal-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="delete-animal-modal-label">Supprimer l'animal ?</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                            <div id="delete-animal-modal-warning"></div>
+                                <button type="button" id='delete-animal-button' class="btn btn-primary text-white my-3">Je souhaite supprimer cet animal.</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="tab-pane container my-3" id="user-create" role="tab-panel" aria-labelledby="user-create-tab">
+        <form id="user-create-form">
+            <div class="mb-3">
+                <label for="user-create-email-input" class="form-label">Adresse email</label>
+                <input type="email" class="form-control" id="user-create-email-input" placeholder="Adresse mail du collaborateur" name="userName">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-password-input" class="form-label">Mot de passe</label>
+                <input type="text" class="form-control" id="user-create-password-input" placeholder="Mot de passe" name="password">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-name-input" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="user-create-name-input" placeholder="Nom de famille du collaborateur" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-first-name-input" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="user-create-first-name-input" placeholder="Prénom du collaborateur" name="firstName">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-role-select" class="form-label">Rôle</label>
+                <select class="form-select" id="user-create-role-select" name="role">
+                    <option value="employee">Employé</option>
+                    <option value="vet">Vétérinaire</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="button" id='user-create-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="user-create-confirmation"></div>
+    </div>
+
 </div>

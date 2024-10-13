@@ -5,7 +5,7 @@ const passwordInput = document.getElementById('password-input');
 const btnSignIn = document.getElementById('btn-signin');
 const signinForm = document.getElementById('signin-form');
 
-const checkCredentials = async () => {
+const checkCredentials = async (e) => {
     let dataForm = new FormData(signinForm);
 
     let myHeaders = new Headers();
@@ -27,7 +27,6 @@ const checkCredentials = async () => {
     .then(async (response) => {
         if (response.ok) {
             const json = await response.json();
-            console.log(json);
             return json;
         } else {
             emailInput.classList.add('is-invalid');
@@ -42,4 +41,10 @@ const checkCredentials = async () => {
     .catch((error) => console.error(error));
 }
 
+const submitOnEnter = (event) => {
+    if (event.key === 'Enter') checkCredentials();
+}
+
 btnSignIn.addEventListener('click', checkCredentials);
+emailInput.addEventListener('keydown', submitOnEnter);
+passwordInput.addEventListener('keydown', submitOnEnter);
