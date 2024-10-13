@@ -30,6 +30,12 @@ const animalUpdateImageInput = document.getElementById('animal-update-image-inpu
 const animalUpdateButton = document.getElementById('animal-update-button');
 let animalToUpdate;
 
+const animalDeleteModalEl = document.getElementById('delete-animal-modal');
+const animalDeleteModal = new bootstrap.Modal(animalDeleteModalEl);
+const animalDeleteWarning = document.getElementById('delete-animal-modal-warning');
+const animalDeleteButton = document.getElementById('delete-animal-button');
+let animalToDelete;
+
 const preloadSelectedHabitat = async (habitatId) => {
     habitatUpdateConfirmation.innerHTML = '';
     const token = getConnexionToken();
@@ -130,8 +136,7 @@ animalCreateModalEl.addEventListener('show.bs.modal', async () => {
       await fetch(`${apiBaseUrl}/animals`, requestOptions)
       .then(async (response) => {
         if (response.ok) {
-          const newAnimal = await response.json();
-  
+          generateAnimalCards()
           animalCreateModal.hide();
         } else {
           alert("Le nouvel animal n'a pas pu être créé.");
@@ -140,7 +145,7 @@ animalCreateModalEl.addEventListener('show.bs.modal', async () => {
       .catch((error) => console.error(error));
   }
 
-const generateAnimalUpdateCards = async () => {
+const generateAnimalCards = async () => {
   const animalsArray = await fetch(`${apiBaseUrl}/animals`, { method: "GET", redirect: "follow" })
   .then((response) => response.json())
   .catch((error) => console.error(error));
@@ -148,15 +153,15 @@ const generateAnimalUpdateCards = async () => {
   let animalCardsHtml = "";
   animalsArray.forEach((animal) => {
     animalCardsHtml += `<div class="col">
-      <div class="card shadow-sm">
+      <div class="card bg-dark text-light shadow-sm">
         <img src="${apiBaseUrl}/animals/image/${animal.imageId}" alt="${animal.species.label}" class="card-image-top"></img>
         <div class="card-body">
           <p class="card-text">${animal.name}</p>
           <p class="card-text">${animal.habitat.name}</p>
           <p class="card-text">${animal.species.label}</p>
-          <div class="action-image-buttons">
-            <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#update-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-pencil-square"></i></button>
-            <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#delete-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-trash"></i></button>
+          <div>
+            <button type="button" class="btn btn-outline-light me-3" data-bs-toggle="modal" data-bs-target="#update-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-outline-light me-3" data-bs-toggle="modal" data-bs-target="#delete-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-trash"></i></button>
           </div>
         </div>
       </div>
@@ -166,7 +171,7 @@ const generateAnimalUpdateCards = async () => {
   animalUpdateCards.innerHTML = animalCardsHtml;
 }
 
-await generateAnimalUpdateCards();
+await generateAnimalCards();
 
 animalUpdateModalEl.addEventListener('show.bs.modal', async (event) => {
   const button = event.relatedTarget;
@@ -202,12 +207,45 @@ const updateAnimal = async () => {
     await fetch(`${apiBaseUrl}/animals/${animalToUpdate.id}`, requestOptions)
     .then(async (response) => {
       if (response.ok) {
-        const updatedAnimal = await response.json();
-
+        generateAnimalCards();
         animalUpdateModal.hide();
       } else {
         alert("Vos modifications n'ont pas pu être sauvegardées.");
       }
     })
     .catch((error) => console.error(error));
+}
+
+animalDeleteModalEl.addEventListener('show.bs.modal', async (event) => {
+  const button = event.relatedTarget;
+  const animalId = button.getAttribute('data-bs-animal-id');
+  animalToDelete = await fetch(`${apiBaseUrl}/animals/${animalId}`, { method: "GET", redirect: "follow"})
+  .then((response) => (response.json()))
+  .catch((error) => console.error(error));
+  animalDeleteWarning.innerHTML = `Vous vous apprêtez à supprimer l'animal "${animalToDelete.name}".`
+  animalDeleteButton.addEventListener('click', deleteAnimal);
+})
+
+const deleteAnimal = async () => {
+  const token = getConnexionToken();
+
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization', `Bearer ${token}`);
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  await fetch(`${apiBaseUrl}/animals/${animalToDelete.id}`, requestOptions)
+  .then((response) => {
+    if (response.ok) {
+      generateAnimalCards();
+      animalDeleteModal.hide();
+    } else {
+      alert(`L'animal "${animalToDelete.name}" n'a pas pu être supprimé.`);
+    }
+  })
+  .catch((error) => console.error(error));
 }

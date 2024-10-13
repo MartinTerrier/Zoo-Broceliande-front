@@ -47,7 +47,7 @@
     <div class="tab-pane" id="animal-management" role="tab-panel" aria-labelledby="animal-management-tab">
 
         <div class="text-center my-3">
-            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#create-animal-modal">Créer un animal</button>
+            <button type="button" class="btn btn-dark text-white" data-bs-toggle="modal" data-bs-target="#create-animal-modal">Créer un animal</button>
         </div>
 
         <div class="modal fade" id="create-animal-modal" tabindex="-1" aria-labelledby="create-animal-modal-label" aria-hidden="true">
@@ -80,7 +80,7 @@
                           <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="animal-create-image-input" name="imageFile">
                         </div>
                         <div class="mb-3 text-center">
-                            <button type="button" id='animal-create-button' class="btn btn-primary text-white">Enregistrer</button>
+                            <button type="button" id='animal-create-button' class="btn btn-dark text-white">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -129,6 +129,23 @@
                     </div>
                   </div>
                 </div>
+
+            <div class="modal fade" id="delete-animal-modal" tabindex="-1" aria-labelledby="delete-animal-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="delete-animal-modal-label">Supprimer l'animal ?</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                            <div id="delete-animal-modal-warning"></div>
+                                <button type="button" id='delete-animal-button' class="btn btn-primary text-white my-3">Je souhaite supprimer cet animal.</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     </div>
 

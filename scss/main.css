@@ -11999,6 +11999,13 @@ article:hover .action-image-buttons {
   opacity: 1;
 }
 
+.card img {
+  height: 115px;
+  width: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .hero-scene {
   position: relative;
   margin-bottom: 15px;
