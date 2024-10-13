@@ -1,7 +1,6 @@
 import { apiBaseUrl, getConnexionToken } from "./script.js";
 
 const habitatUpdateForm = document.getElementById('habitat-update-form');
-const habitatToUpdateSelect = document.getElementById('habitat-update-select');
 const habitatUpdateSelect = document.getElementById('habitat-update-select');
 const habitatUpdateButton = document.getElementById('habitat-update-button');
 const habitatUpdateConfirmation = document.getElementById('habitat-update-confirmation');
@@ -14,7 +13,7 @@ const animalCreateModal = new bootstrap.Modal(animalCreateModalEl);
 const animalCreateForm = document.getElementById('animal-create-form');
 const animalCreateNameInput = document.getElementById('animal-create-name-input');
 const animalCreateSpeciesInput = document.getElementById('animal-create-species-input');
-const animalCreateHabitatInput = document.getElementById('animal-create-habitat-input');
+
 const animalCreateImageInput = document.getElementById('animal-create-image-input');
 const animalCreateButton = document.getElementById('animal-create-button');
 
@@ -35,6 +34,15 @@ const animalDeleteModal = new bootstrap.Modal(animalDeleteModalEl);
 const animalDeleteWarning = document.getElementById('delete-animal-modal-warning');
 const animalDeleteButton = document.getElementById('delete-animal-button');
 let animalToDelete;
+
+const userCreateForm = document.getElementById('user-create-form');
+const userCreateEmailInput = document.getElementById('user-create-email-input');
+const userCreateNameInput = document.getElementById('user-create-name-input');
+const userCreateFirstNameInput = document.getElementById('user-create-first-name-input');
+const userCreateRoleSelect = document.getElementById('user-create-role-select');
+const userCreateButton = document.getElementById('user-create-button');
+const userCreateConfirmation = document.getElementById('user-create-confirmation');
+
 
 const preloadSelectedHabitat = async (habitatId) => {
     habitatUpdateConfirmation.innerHTML = '';
@@ -67,8 +75,6 @@ habitatUpdateSelect.addEventListener('change', async (event) => {
 
 const updateHabitat = async () => {
     const formData = new FormData(habitatUpdateForm);
-    console.log(formData);
-    
     const token = getConnexionToken();
 
     const myHeaders = new Headers();
@@ -81,7 +87,7 @@ const updateHabitat = async () => {
       redirect: 'follow'
     };
 
-    await fetch(`${apiBaseUrl}/habitats/update/${habitatToUpdateSelect.value}`, requestOptions)
+    await fetch(`${apiBaseUrl}/habitats/update/${habitatUpdateSelect.value}`, requestOptions)
     .then(async (response) => {
         if (response.ok) {
             const updatedHabitat = await response.json();
@@ -156,12 +162,12 @@ const generateAnimalCards = async () => {
       <div class="card bg-dark text-light shadow-sm">
         <img src="${apiBaseUrl}/animals/image/${animal.imageId}" alt="${animal.species.label}" class="card-image-top"></img>
         <div class="card-body">
-          <p class="card-text">${animal.name}</p>
-          <p class="card-text">${animal.habitat.name}</p>
-          <p class="card-text">${animal.species.label}</p>
+          <p class="card-text my-0">${animal.name}</p>
+          <p class="card-text my-0">${animal.habitat.name}</p>
+          <p class="card-text my-0 pb-3">${animal.species.label}</p>
           <div>
-            <button type="button" class="btn btn-outline-light me-3" data-bs-toggle="modal" data-bs-target="#update-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-pencil-square"></i></button>
-            <button type="button" class="btn btn-outline-light me-3" data-bs-toggle="modal" data-bs-target="#delete-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#update-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#delete-animal-modal" data-bs-animal-id="${animal.id}"><i class="bi bi-trash"></i></button>
           </div>
         </div>
       </div>
@@ -249,3 +255,43 @@ const deleteAnimal = async () => {
   })
   .catch((error) => console.error(error));
 }
+
+const createUser = async () => {
+  const formData = new FormData(userCreateForm);  
+  const token = getConnexionToken();
+
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization', `Bearer ${token}`);
+  myHeaders.append('Content-Type', 'application/json');
+
+  let raw = JSON.stringify({
+    'userName': formData.get('userName'),
+    'name': formData.get('name'),
+    'firstName': formData.get('firstName'),
+    'role': formData.get('role'),
+});
+
+  const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow',
+  };
+
+  await fetch(`${apiBaseUrl}/auth/create`, requestOptions)
+  .then(async (response) => {
+      if (response.ok) {
+          const [createdUser, password] = await response.json();
+          
+          userCreateEmailInput.value = null;
+          userCreateNameInput.value = null;
+          userCreateFirstNameInput.value = null;
+          userCreateConfirmation.innerHTML = `<div><i class="bi bi-check-square-fill text-primary"></i> Un nouvel utilisateur associé à l'adresse ${createdUser.userName} a bien été créé.
+          Son mot de passe est <strong>${password}</strong>. Attention : ce mot de passe n'est pas stocké en clair dans la base de données, copiez-le donc soigneusement pour le transmettre au nouveau collaborateur !</div>`
+      } else {
+          alert("Le nouvel utilisateur n'a pas pu être créé.");
+      }})
+  .catch((error) => console.error(error));
+}
+
+userCreateButton.addEventListener('click', createUser);

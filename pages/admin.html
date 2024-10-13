@@ -11,6 +11,9 @@
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="animal-management-tab" data-bs-toggle="tab" data-bs-target="#animal-management" type="button" role="tab" aria-selected="false">Gestion des animaux</button>
     </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="user-create-tab" data-bs-toggle="tab" data-bs-target="#user-create" type="button" role="tab" aria-selected="true">Création des utilisateurs</button>
+    </li>
 </ul>
 
 <div class="tab-content">
@@ -88,7 +91,7 @@
             </div>
 
             <div class="container">
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="animal-update-cards">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-3" id="animal-update-cards">
                     
                 </div>
             </div>
@@ -147,6 +150,34 @@
                 </div>
             </div>
 
+    </div>
+
+    <div class="tab-pane container my-3" id="user-create" role="tab-panel" aria-labelledby="user-create-tab">
+        <form id="user-create-form">
+            <div class="mb-3">
+                <label for="user-create-email-input" class="form-label">Adresse email</label>
+                <input type="email" class="form-control" id="user-create-email-input" placeholder="Adresse mail du collaborateur" name="userName">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-name-input" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="user-create-name-input" placeholder="Nom de famille du collaborateur" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-first-name-input" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="user-create-first-name-input" placeholder="Prénom du collaborateur" name="firstName">
+            </div>
+            <div class="mb-3">
+                <label for="user-create-role-select" class="form-label">Rôle</label>
+                <select class="form-select" id="user-create-role-select" name="role">
+                    <option value="employee">Employé</option>
+                    <option value="vet">Vétérinaire</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="button" id='user-create-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="user-create-confirmation"></div>
     </div>
 
 </div>
