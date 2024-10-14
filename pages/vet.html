@@ -3,3 +3,29 @@
         <h1>Mon compte</h1>
     </div>
 </div>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="meal-lookup-tab" data-bs-toggle="tab" data-bs-target="#meal-lookup" type="button" role="tab" aria-selected="true">Consultation des repas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="habitat-comment-tab" data-bs-toggle="tab" data-bs-target="#habitat-comment" type="button" role="tab" aria-selected="false">Commentaires sur les habitats</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="report-create-tab" data-bs-toggle="tab" data-bs-target="#report-create" type="button" role="tab" aria-selected="false">Rapports sur les animaux</button>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active container my-3" id="meal-lookup" role="tab-panel" aria-labelledby="meal-lookup-tab">
+        <div class="mb-3">
+            <label for="meal-lookup-animal-select">Sélectionnez un animal pour consulter ses repas.</label>
+            <select id="meal-lookup-animal-select" name="animalId"></select>
+        </div>
+        <div id="meal-table">
+            
+        </div>
+    </div>
+
+</div>
