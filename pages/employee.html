@@ -1,0 +1,52 @@
+<div class="hero-scene text-white">
+    <div class="hero-scene-content">
+        <h1>Mon compte</h1>
+    </div>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="meal-create-tab" data-bs-toggle="tab" data-bs-target="#meal-create" type="button" role="tab" aria-selected="true">Saisie des repas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="comment-management-tab" data-bs-toggle="tab" data-bs-target="#comment-management" type="button" role="tab" aria-selected="false">Gestion des commentaires</button>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active container my-3" id="meal-create" role="tab-panel" aria-labelledby="meal-create-tab">
+        <form id="meal-create-form">
+            <div class="mb-3">
+                <label for="meal-create-animal-select" class="form-label">Animal</label>
+                <select class="form-select" id="meal-create-animal-select" name="animalId"></select>
+            </div>
+            <div class="mb-3">
+                <label for="meal-create-food-input" class="form-label">Nourriture</label>
+                <input type="text" class="form-control" id="meal-create-food-input" name="food">
+            </div>
+            <div class="mb-3">
+                <label for="meal-create-quantity-input" class="form-label">Quantité</label>
+                <input type="text" class="form-control" id="meal-create-quantity-input" name="quantity"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="meal-create-time-input">Date et heure du repas:</label>
+                <input
+                type="datetime-local"
+                id="meal-create-time-input"
+                name="date"
+                min="2024-10-01T00:00"
+                max="2054-12-31T00:00" />
+            </div>
+        <div class="text-center">
+                <button type="button" id='meal-create-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="meal-create-confirmation"></div>
+    </div>
+
+    <div class="tab-pane active container my-3" id="comment-management" role="tab-panel" aria-labelledby="comment-management-tab">
+        
+    </div>
+
+</div>

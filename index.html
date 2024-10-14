@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="scss/main.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Arcadia</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/habitats">Habitats</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/comments">Avis</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+              <li class="nav-item" data-show="disconnected">
+                <a class="nav-link" href="/signin">Connexion</a>
+              </li>
+              <li class="nav-item" id="account-page">
+                
+              </li>
+              <li class="nav-item" data-show="connected">
+                <button class="nav-link" id="signout-btn">Déconnexion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>
+
+<main id="main-page">
+  <!-- Le contenu de la page est injecté ici -->
+</main>
+
+<footer class="bg-primary text-white text-center container-fluid">
+  <div class="row d-flex align-items-center">
+    <div class="col-12 col-lg-4">
+      <h3>Zooparc d'Arcadia</h3>
+      <p>
+        Route de Brocéliande<br>
+        35380 Paimpont<br>
+        Bretagne, France
+      </p>
+    </div>
+    <div class="col-6 col-lg-4">
+      Ouvert toute l'année, 7 jours sur 7<br>
+      9h - 18h
+    </div>
+    <div class="col-6 col-lg-4">
+      <a href="/contact" class="text-light">Formulaire de contact</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/js/script.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="/router/router.js"></script>
+</body>
+</html>

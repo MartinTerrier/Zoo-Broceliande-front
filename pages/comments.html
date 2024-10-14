@@ -1,0 +1,39 @@
+<div class="hero-scene text-white">
+    <div class="hero-scene-content">
+        <h1>Vos avis</h1>
+    </div>
+</div>
+<div class="container">
+    <section id="comment-list">
+
+    </section>
+</div>
+<div class="container text-center">
+<button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#comment-submit-modal">Poster un commentaire</button>
+</div>
+
+<div class="modal fade" id="comment-submit-modal" tabindex="-1" aria-labelledby="comment-submit-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="comment-submit-modal-label">Poster un avis</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <label for="alias-input" class="form-label">Alias</label>
+                  <input type="text" class="form-control" id="alias-input" placeholder="Votre alias" name="alias"> 
+                </div>
+                <div class="mb-3">
+                  <label for="content-input" class="form-label">Avis</label>
+                  <textarea class="form-control" id="content-input" placeholder="Votre avis"  name="content"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary text-white">Envoyer</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

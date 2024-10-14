@@ -1,0 +1,88 @@
+<div class="hero-scene text-white">
+    <div class="hero-scene-content">
+        <h1>Nos services</h1>
+    </div>
+</div>
+<div class="container text-center mb-3">
+  <button type="button" class="btn btn-primary text-white" data-show="admin" data-bs-toggle="modal" data-bs-target="#create-service-modal">Créer un service.</button>
+</div>
+<section id="service-list">
+
+</section>
+
+<div id="modal-container">
+    <div class="modal fade" id="edit-service-modal" tabindex="-1" aria-labelledby="edit-service-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="edit-service-modal-label">Edition du service</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id='service-update-form'>
+                    <div class="mb-3">
+                      <label for="service-update-name-input" class="form-label">Nom</label>
+                      <input type="text" class="form-control" id="service-update-name-input" value="" name="name"> 
+                    </div>
+                    <div class="mb-3">
+                      <label for="service-update-content-input" class="form-label">Description</label>
+                      <textarea class="form-control" id="service-update-content-input"  name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="service-update-image-input" class="form-label">Image associée</label>
+                      <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="service-update-image-input" name="imageFile">
+                    </div>
+                    <div class="text-center">
+                        <button type="button" id='service-update-button' class="btn btn-primary text-white">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="delete-service-modal" tabindex="-1" aria-labelledby="delete-service-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="delete-service-modal-label">Supprimer le service ?</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                  <div id="delete-service-modal-warning"></div>
+                    <button type="button" id='delete-service-button' class="btn btn-primary text-white my-3">Je souhaite supprimer ce service.</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="create-service-modal" tabindex="-1" aria-labelledby="create-service-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="create-service-modal-label">Création d'un service</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id='service-create-form'>
+                    <div class="mb-3">
+                      <label for="service-create-name-input" class="form-label">Nom</label>
+                      <input type="text" class="form-control" id="service-create-name-input" value="" name="name"> 
+                    </div>
+                    <div class="mb-3">
+                      <label for="service-create-content-input" class="form-label">Description</label>
+                      <textarea class="form-control" id="service-create-content-input"  name="description"></textarea>
+                    </div>
+                    <div class="mb-3"></div>
+                      <label for="service-create-image-input" class="form-label">Image associée</label>
+                      <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="service-create-image-input" name="imageFile">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="button" id='service-create-button' class="btn btn-primary text-white">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
