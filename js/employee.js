@@ -27,7 +27,7 @@ const createMeal = async () => {
     myHeaders.append('Authorization', `Bearer ${token}`);
     myHeaders.append('Content-Type', 'application/json');
 
-    let raw = JSON.stringify({
+    const raw = JSON.stringify({
         'animalId': +formData.get('animalId'),
         'userName': jwtDecode(token).userName,
         'food': formData.get('food'),

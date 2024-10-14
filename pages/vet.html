@@ -9,9 +9,6 @@
         <button class="nav-link active" id="meal-lookup-tab" data-bs-toggle="tab" data-bs-target="#meal-lookup" type="button" role="tab" aria-selected="true">Consultation des repas</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="habitat-comment-tab" data-bs-toggle="tab" data-bs-target="#habitat-comment" type="button" role="tab" aria-selected="false">Commentaires sur les habitats</button>
-    </li>
-    <li class="nav-item" role="presentation">
         <button class="nav-link" id="report-create-tab" data-bs-toggle="tab" data-bs-target="#report-create" type="button" role="tab" aria-selected="false">Rapports sur les animaux</button>
     </li>
 </ul>
@@ -19,13 +16,42 @@
 <div class="tab-content">
 
     <div class="tab-pane active container my-3" id="meal-lookup" role="tab-panel" aria-labelledby="meal-lookup-tab">
-        <div class="mb-3">
+        <div class="my-5">
             <label for="meal-lookup-animal-select">Sélectionnez un animal pour consulter ses repas.</label>
             <select id="meal-lookup-animal-select" name="animalId"></select>
         </div>
         <div id="meal-table">
             
         </div>
+    </div>
+
+    <div class="tab-pane container my-3" id="report-create" role="tab-panel" aria-labelledby="report-create-tab">
+        <form id="report-create-form">
+            <div class="mb-3">
+                <label for="report-create-animal-select" class="form-label">Sélectionnez l'animal concerné :</label>
+                <select class="form-select" id="report-create-animal-select" name="animalId"></select>
+            </div>
+            <div class="mb-3">
+                <label for="report-create-status-input" class="form-label">État</label>
+                <input type="text" class="form-control" id="report-create-status-input" name="status">
+            </div>
+            <div class="mb-3">
+                <label for="report-create-content-input" class="form-label">Rapport</label>
+                <textarea class="form-control" id="report-create-content-input" name="content"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="report-create-food-input" class="form-label">Nourriture</label>
+                <input type="text" class="form-control" id="report-create-food-input" name="food">
+            </div>
+            <div class="mb-3">
+                <label for="report-create-quantity-input" class="form-label">Quantité</label>
+                <input type="text" class="form-control" id="report-create-quantity-input" name="quantity">
+            </div>
+            <div class="text-center">
+                <button type="button" id='report-create-button' class="btn btn-primary text-white">Enregistrer</button>
+            </div>
+        </form>
+        <div id="report-create-confirmation"></div>
     </div>
 
 </div>
